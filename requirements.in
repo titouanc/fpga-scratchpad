@@ -1,0 +1,3 @@
+migen
+git+https://github.com/chmousset/litex@faae7fdb5ac23e9dfad31279f90338427bdcb805
+jupyter
