@@ -32,7 +32,7 @@ export PATH=$(pwd)/fpga_toolchain/bin:$(pwd)/f32c-tools/ujprog/build/:$PATH
 # Build && run
 
 ```bash
-python hello.py
+python 01-HelloWorld.py
 ujprog build/top.bit
 ```
 
@@ -60,6 +60,6 @@ Find the USB device identifier: in the dmesg line `device disconnected`, we have
 
 Then, re-bind it to the serial driver:
 
-```
+```bash
 sudo bash -c 'echo 1-4.4.1:1.0 > /sys/bus/usb/drivers/ftdi_sio/bind'
 ```
