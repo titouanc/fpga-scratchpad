@@ -1,3 +1,4 @@
+from migen import Module
 from litex.soc.cores.uart import UARTWishboneBridge
 from litex.soc.integration.export import get_csr_csv
 from litex.soc.integration.soc_core import SoCCore
@@ -6,6 +7,14 @@ from litex.soc.interconnect.csr import AutoCSR, CSRStatus, CSRStorage
 from fpga_platform import build_platform
 
 SYS_CLK = int(25e6)
+
+
+class Adder(Module, AutoCSR):
+    def __init__(self):
+        self.A = CSRStorage(32, name="A", reset=0)
+        self.B = CSRStorage(32, name="B", reset=0)
+        self.C = CSRStatus(32, name="C", reset=0)
+        self.comb += self.C.status.eq(self.A.storage + self.B.storage)
 
 
 class CSRDemo(SoCCore, AutoCSR):
@@ -29,11 +38,8 @@ class CSRDemo(SoCCore, AutoCSR):
         self.add_wb_master(bridge.wishbone)
 
         # Then wire up the addition
-        A = CSRStorage(32, name="A", reset=0)
-        B = CSRStorage(32, name="B", reset=0)
-        C = CSRStatus(32, name="C", reset=0)
-        self.comb += C.status.eq(A.storage + B.storage)
-
+        self.submodules.adder = Adder()
+        self.add_csr("adder")
 
 
 if __name__ == "__main__":
@@ -44,4 +50,7 @@ if __name__ == "__main__":
 
     plat.build(top)
     
-    print(get_csr_csv(top.csr.regions, top.constants))
+    csv = get_csr_csv(top.csr.regions, top.constants)
+    print(csv)
+    with open("build/csr.csv", 'w') as out:
+        out.write(csv)
