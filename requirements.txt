@@ -18,6 +18,8 @@
     # via -r requirements.in
 -e git+https://github.com/litex-hub/litex-boards.git@2020.12#egg=litex_boards
     # via -r requirements.in
+-e git+https://github.com/litex-hub/pythondata-cpu-vexriscv.git@2020.08#egg=pythondata-cpu-vexriscv
+    # via -r requirements.in
 certifi==2020.11.8
     # via requests
 chardet==3.0.4
