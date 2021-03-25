@@ -10,9 +10,16 @@ cmake ..
 make
 popd
 
-# Toolchain (see https://github.com/open-tool-forge/fpga-toolchain/releases)
+# FPGA Toolchain (see https://github.com/open-tool-forge/fpga-toolchain/releases)
 wget https://github.com/open-tool-forge/fpga-toolchain/releases/download/nightly-20201112/fpga-toolchain-linux_x86_64-nightly-20201112.tar.xz
 tar xf fpga-toolchain-linux_x86_64-nightly-20201112.tar.gz
+
+# RISC-V Toolchain
+git clone https://github.com/riscv/riscv-gnu-toolchain
+pushd riscv-gnu-toolchain
+./configure --prefix /opt/riscv
+make
+popd
 
 # Python pkgs
 python3 -mvenv ve3
@@ -25,7 +32,7 @@ pip install -r requirements.txt
 
 ```bash
 source ve3/bin/activate
-export PATH=$(pwd)/fpga_toolchain/bin:$(pwd)/f32c-tools/ujprog/build/:$PATH
+export PATH=$(pwd)/fpga_toolchain/bin:$(pwd)/f32c-tools/ujprog/build/:/opt/riscv/bin:$PATH
 ```
 
 
@@ -36,6 +43,12 @@ python 01-HelloWorld.py
 ujprog build/top.bit
 ```
 
+
+# Build && run RISC-V demo
+
+```bash
+python -m litex_boards.targets.ulx3s --device LFE5U-12F --build
+```
 
 # Handling the ULX3S FTDI tty with ujprog
 
