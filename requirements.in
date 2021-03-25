@@ -1,4 +1,6 @@
 migen
+sphinx
+sphinxcontrib-wavedrom
 
 # LiteX components
 -e git+https://github.com/enjoy-digital/litex.git@2020.12#egg=litex
