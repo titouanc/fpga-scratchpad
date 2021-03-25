@@ -1,3 +1,9 @@
 migen
-git+https://github.com/chmousset/litex@faae7fdb5ac23e9dfad31279f90338427bdcb805
-jupyter
+-e git+https://github.com/litex-hub/litex-boards.git@2020.12#egg=litex_boards
+
+-e git+https://github.com/enjoy-digital/litex.git@2020.12#egg=litex
+-e git+https://github.com/enjoy-digital/litedram.git@2020.12#egg=litedram
+-e git+https://github.com/enjoy-digital/liteeth.git@2020.12#egg=liteeth
+-e git+https://github.com/enjoy-digital/liteiclink.git@2020.12#egg=liteiclink
+-e git+https://github.com/enjoy-digital/litesdcard.git@2020.12#egg=litesdcard
+-e git+https://github.com/enjoy-digital/litevideo.git@2020.12#egg=litevideo
